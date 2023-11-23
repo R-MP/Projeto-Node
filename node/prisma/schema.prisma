@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model livro{
+  id Int @id @default(autoincrement())
+  titulo String @db.VarChar(50)
+  isbn String @db.VarChar(50) @unique
+  anoEdicao Int @db.Int
+  editora String @db.VarChar(50)
+}
+
+model Memoria{
+  id Int @id @default(autoincrement())
+  modelo String @db.VarChar(50)
+  ddr String @db.VarChar(50)
+  frequencia Int @db.Int
+  quantidadeRam String @db.VarChar(50)
+  marca String @db.VarChar(50)
+}
+
+model Fonte{
+  id Int @id @default(autoincrement())
+  modelo String @db.VarChar(50)
+  potencia Int @db.Int
+  formato String @db.VarChar(50)
+  marca String @db.VarChar(50)
+}
+
+model Processador{
+  id Int @id @default(autoincrement())
+  modelo String @db.VarChar(50)
+  socket String @db.VarChar(50)
+  arquitetura String @db.VarChar(50)
+  nucleos Int @db.Int
+  threads Int @db.Int
+  frequencia Int @db.Int
+  marca String @db.VarChar(50)
+}
+
+model PlacaMae{
+  id Int @id @default(autoincrement())
+  modelo String @db.VarChar(50)
+  socket String @db.VarChar(50)
+  formato String @db.VarChar(50)
+  slotRam String @db.VarChar(50)
+  slotExp String @db.VarChar(50)
+  marca String @db.VarChar(50)
+}
