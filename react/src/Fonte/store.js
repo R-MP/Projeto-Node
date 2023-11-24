@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './style.css';
 
 function Store() {
@@ -31,6 +32,10 @@ function Store() {
 
     return (
         <div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <form onSubmit={gravar} className='formulario'>
                 Modelo: <input ref={modelo} type="text" required />
                 Potência: <input ref={potencia} type="number" required />

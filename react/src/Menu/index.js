@@ -1,21 +1,49 @@
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
+import $ from 'jquery'; // Importe a biblioteca jQuery
 
 function Menu() {
+    useEffect(() => {
+        const setDotPosition = () => {
+            const activeOffset = $('nav ul .active').position().left;
+            const activeItemWidth = $('nav ul .active').width();
+            $('.dot').css('left', activeOffset + activeItemWidth / 2);
+            const bgColor = $('.active a').css('background-color');
+            $('.dot').css('background-color', bgColor);
+        };
+
+        $('document').ready(() => {
+            setDotPosition();
+        });
+
+        $('nav').mouseout(() => {
+            setDotPosition();
+        });
+
+        $('nav ul li').hover(function () {
+            const navOffset = $(this).position().left;
+            const navItemWidth = $(this).width();
+            $('.dot').css('left', navOffset + navItemWidth / 2);
+            const bgColor = $('a', this).css('background-color');
+            $('.dot').css('background-color', bgColor);
+        });
+    }, []);
+
     return (
-        <div className="menu">
-            <div className="logo">
-                <h1>TECH HUB</h1>
-            </div>
-            <ul className="options">
-                <li><Link to="/" className="link">Home</Link></li>
-                <li><Link to="/processador" className="link">Processadores</Link></li>
-                <li><Link to="/placa-mae" className="link">Placas Mãe</Link></li>
-                <li><Link to="/memoria" className="link">Memórias</Link></li>
-                <li><Link to="/fonte" className="link">Fontes</Link></li>
-            </ul>
-        </div>
-    )
+        <header className="header">
+            <nav>
+                <div className="dot"></div>
+                <ul>
+                    <li className="active"><a href="/">Home</a></li>
+                    <li><a href="/processador">Processadores</a></li>
+                    <li><a href="/placa-mae">Placas Mãe</a></li>
+                    <li><a href="/memoria">Memórias</a></li>
+                    <li><a href="/fonte">Fontes</a></li>
+                </ul>
+            </nav>
+        </header>
+    );
 }
 
 export default Menu;

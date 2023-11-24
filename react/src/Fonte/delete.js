@@ -17,7 +17,9 @@ function Delete() {
     }
 
     return (
-        <div>
+        <div style={{ padding: '40px' }}>
+            <br></br>
+            <br></br>
             <h2>Excluir Fonte</h2>
             <button onClick={() => deletarFonte()}>Excluir Fonte</button>
             {/* Adicione botões ou lógica para selecionar a fonte a ser excluída */}

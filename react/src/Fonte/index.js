@@ -30,35 +30,52 @@ function Fonte() {
     };
 
     return (
-        <div class="corpo">
-    <Link to="/fonteCreate" class="btn-criar-nova">Criar Nova</Link>
-    <p class="retorno-api">Retorno da API: {JSON.stringify(fontes)}</p>
-    <table class="tabela">
-        <thead>
-            <tr>
-                <th>Fontes</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {fontes.map((fonte) => (
-                <tr key={fonte.id}>
-                    <td>{fonte.modelo}</td>
-                    <td>
-                        <Link to={`/fonteUpdate/${fonte.id}`} class="btn-alterar">Alterar</Link>
-                    </td>
-                    <td>
-                        <button onClick={() => handleDelete(fonte.id)} class="btn-remover">Remover</button>
-                    </td>
+        
+        <div style={{ padding: '40px' }}>
+            <br></br>
+            <br></br>
+            <br></br>
+        <div class="crtNew">
+            <Link to="/fonteCreate" class="btn-criar-nova">
+                Criar Nova
+            </Link>
+        </div>
+        <p class="retorno-api">Retorno da API: {JSON.stringify(fontes)}</p>
+        <table class="tabela">
+            <tbody>          
+                <tr>
+                    <td class="top center">ID</td>
+                    <td class="top center"><strong>Modelo</strong></td>
+                    <td class="top center"><strong>Potencia</strong></td>
+                    <td class="top center"><strong>Formato</strong></td>
+                    <td class="top center"><strong>Marca</strong></td>
+                    <td class="top center" colspan="2" width="1"><strong>Ações</strong></td>
                 </tr>
-            ))}
-        </tbody>
-    </table>
-    <Link to="/" class="btn-voltar">Voltar</Link>
-</div>
+            
+            </tbody>
+            <tbody>
+                {fontes.map((fonte) => (
+                    
+                    <tr key={fonte.id}> 
+                        <td align="center">{fonte.id}</td>
+                        <td align="center">{fonte.modelo}</td>
+                        <td align="center">{fonte.potencia}</td>
+                        <td align="center">{fonte.formato}</td>
+                        <td align="center">{fonte.marca}</td>
+                        <td align="center"><Link to={`/fonteUpdate/${fonte.id}`} class="btn-alterar">Alterar</Link>
+                        <Link to={`/fonteDelete/${fonte.id}`} class="btn-remover">Remover</Link></td>
+                    
+                    </tr>
 
-    );
-}
+
+                ))}
+            </tbody>
+        </table>
+        <footer><Link to="/" class="btn-voltar">Voltar</Link></footer>
+        
+    </div>
+
+        );
+    }
 
 export default Fonte;

@@ -26,7 +26,7 @@ function Update() {
         <input id="modelo" class="input-field" value={dados?.modelo || ''} type="text" required onChange={(e) => setDados({ ...dados, modelo: e.target.value })} />
 
         <label for="potencia">Potência:</label>
-        <input id="potencia" class="input-field" value={dados?.potencia || ''} type="number" required onChange={(e) => setDados({ ...dados, potencia: e.target.value })} />
+        <input id="potencia" class="input-field" value={dados?.potencia || ''} type="number" required onChange={(e) => setDados({ ...dados, potencia: parseInt(e.target.value) })} />
 
         <label for="formato">Formato:</label>
         <input id="formato" class="input-field" value={dados?.formato || ''} type="text" required onChange={(e) => setDados({ ...dados, formato: e.target.value })} />

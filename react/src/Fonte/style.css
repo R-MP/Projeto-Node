@@ -1,69 +1,29 @@
-.corpo {
-    background-color: #111;
-    padding: 20px;
-    color: #fff;
-}
+.style-tabela table{ float:left; border:1px solid #ccc; border-bottom:0; border-right:0; font-size:0.8em; }
+.style-tabela table tr td  { padding:0.5em; border:1px solid #ccc; border-top:0; border-left:0;}
+.style-tabela table td.top { background-color:#00bcc4; color:#fff; font-size:1.2em;}
+.style-tabela table td.top.center {text-align: center;}
+.style-tabela table td.total { text-align:left; font-weight: bold;}
+.style-tabela table td.top-toltip{ background-color:#207d97; height:25px;  color:#fff; font-size:16px;}
+.style-tabela tbody tr td    {padding:0.3em; border:1px solid #ccc; border-top:0; border-left:0;}
+.style-tabela tbody tr       {background-color:#fff; color:#666;}
+.style-tabela tbody tr:hover {background-color:#f4f4f4; color:#00bcc4;}
+ 
+.style-tabela tbody tr td .editar  { color:#5500d5; font-size:1.2em; font-weight:bold; display:inline; text-decoration:none;} 
+.style-tabela tbody tr td .deletar { color:#bf303c; font-size:1.2em; font-weight:bold; display:inline; text-decoration:none; }
+.style-tabela tbody tr.mensagemAlerta { background-color:#fdeeef; color:#bf303c;}
 
-.btn-criar-nova,
-.btn-alterar,
-.btn-remover,
-.btn-voltar {
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    border-radius: 4px;
-}
-
-.btn-criar-nova {
-    background-color: #3498db;
-}
-
-.btn-alterar {
-    background-color: #1abc9c;
-}
-
-.btn-remover {
-    background-color: #e74c3c;
-}
-
-.btn-voltar {
-    background-color: #2c3e50;
-}
-
-.retorno-api {
-    color: #a8a8a8;
-}
-
-.tabela {
+footer {
+    position: absolute;
+    top: 90%;
+    left: 3%;
     width: 100%;
-    border-collapse: collapse;
-}
+    text-align: left;
+  }
 
-.tabela th,
-.tabela td {
-    padding: 8px 12px;
+.crtNew {
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 100%;
     text-align: left;
 }
-
-.tabela th {
-    background-color: #2980b9;
-}
-
-.tabela td {
-    border-bottom: 1px solid #444;
-}
-
-.tabela td:last-child {
-    text-align: center;
-}
-
-html {
-    height: 100%;
-    /*Image only BG fallback*/
-    
-    /*background = gradient + image pattern combo*/
-    background: 
-      linear-gradient(rgba(15, 15, 15, 0.6), rgba(179, 179, 179, 0.6));
-  }
