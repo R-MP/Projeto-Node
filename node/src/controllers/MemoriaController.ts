@@ -44,7 +44,7 @@ class MemoriaController {
             data: {
                 modelo: modelo,
                 ddr: ddr,
-                frequencia: Number(frequencia),
+                frequencia: frequencia,
                 quantidadeRam: quantidadeRam,
                 marca: marca, // Adicionado o campo marca
             },

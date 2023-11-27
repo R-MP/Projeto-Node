@@ -22,7 +22,7 @@ model Memoria{
   id Int @id @default(autoincrement())
   modelo String @db.VarChar(50)
   ddr String @db.VarChar(50)
-  frequencia Int @db.Int
+  frequencia String @db.VarChar(50)
   quantidadeRam String @db.VarChar(50)
   marca String @db.VarChar(50)
 }
@@ -30,7 +30,7 @@ model Memoria{
 model Fonte{
   id Int @id @default(autoincrement())
   modelo String @db.VarChar(50)
-  potencia Int @db.Int
+  potencia String @db.VarChar(50)
   formato String @db.VarChar(50)
   marca String @db.VarChar(50)
 }
@@ -40,9 +40,9 @@ model Processador{
   modelo String @db.VarChar(50)
   socket String @db.VarChar(50)
   arquitetura String @db.VarChar(50)
-  nucleos Int @db.Int
-  threads Int @db.Int
-  frequencia Int @db.Int
+  nucleos String @db.VarChar(50)
+  threads String @db.VarChar(50)
+  frequencia String @db.VarChar(50)
   marca String @db.VarChar(50)
 }
 

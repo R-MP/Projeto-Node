@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import './styleStore.css';
+import { Link, useHistory } from 'react-router-dom';
 
 function Store() {
     const [status, setStatus] = useState('');
@@ -16,7 +14,7 @@ function Store() {
         try {
             const dados = {
                 modelo: modelo.current.value,
-                potencia: parseInt(potencia.current.value), // Convertido para número
+                potencia: potencia.current.value, // Convertido para número
                 formato: formato.current.value,
                 marca: marca.current.value
             };
@@ -24,6 +22,9 @@ function Store() {
             const resposta = await axios.post('http://localhost:4000/fonte', dados);
             console.log('Resposta da API:', resposta.data);
             setStatus(resposta.data);
+
+            // Redirecionamento após o envio bem-sucedido
+            window.location.href = '/fonte';
         } catch (erro) {
             console.error('Erro ao enviar dados:', erro);
             setStatus(`Falha: ${erro}`);
@@ -31,29 +32,28 @@ function Store() {
     }
 
     return (
+        
         <div style={{ padding: '40px' }}>
+
             <br></br>
             <br></br>
             <br></br>
             <br></br>
-            <form onSubmit={gravar} class="tabela" className='formulario'>
-                Modelo: <input ref={modelo} type="text" required />
-                Potência: <input ref={potencia} type="number" required />
-                Formato: <input ref={formato} type="text" required />
-                Marca: <input ref={marca} type="text" required />
-                <button type='submit'>Enviar</button>
-            </form>
+
+            <div id="feedback-form">
+                <h2 class="header">Registro de Fonte</h2>
+                <div>
+                    <form onSubmit={gravar} class="tabela">
+                    <input type="text" placeholder="Modelo" ref={modelo} required></input>
+                    <input type="text" placeholder="Potência" ref={potencia} required></input>
+                    <input type="text" placeholder="Formato" ref={formato} required></input>
+                    <input type="text" placeholder="Marca" ref={marca} required></input>
+                    <button type="submit">Registrar</button>
+                    </form>
+                </div>
+            </div>
+
             <h3>{status.fonte}</h3>
-            <h4>Dados retornados pela API:
-                <br />
-                Modelo: {status.dados?.modelo || "nulo"}
-                <br />
-                Potência: {status.dados?.potencia || "nulo"}
-                <br />
-                Formato: {status.dados?.formato || "nulo"}
-                <br />
-                Marca: {status.dados?.marca || "nulo"}
-            </h4>
             <footer><Link to="/fonte" class="btn-voltar">Voltar</Link></footer>
         </div>
     );

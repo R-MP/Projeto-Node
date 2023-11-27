@@ -63,7 +63,7 @@ function Fonte() {
                         <td align="center">{fonte.formato}</td>
                         <td align="center">{fonte.marca}</td>
                         <td align="center"><Link to={`/fonteUpdate/${fonte.id}`} class="btn-alterar">Alterar</Link>
-                        <Link to={`/fonteDelete/${fonte.id}`} class="btn-remover">Remover</Link></td>
+                        <button onClick={() => handleDelete(fonte.id)} class="btn-remover">Remover</button></td>
                     
                     </tr>
 
