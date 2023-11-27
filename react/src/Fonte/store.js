@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import './style.css';
+import './styleStore.css';
 
 function Store() {
     const [status, setStatus] = useState('');
@@ -31,12 +31,12 @@ function Store() {
     }
 
     return (
-        <div>
+        <div style={{ padding: '40px' }}>
             <br></br>
             <br></br>
             <br></br>
             <br></br>
-            <form onSubmit={gravar} className='formulario'>
+            <form onSubmit={gravar} class="tabela" className='formulario'>
                 Modelo: <input ref={modelo} type="text" required />
                 Potência: <input ref={potencia} type="number" required />
                 Formato: <input ref={formato} type="text" required />
@@ -54,7 +54,7 @@ function Store() {
                 <br />
                 Marca: {status.dados?.marca || "nulo"}
             </h4>
-            <Link to='/fonte'>Voltar</Link>
+            <footer><Link to="/fonte" class="btn-voltar">Voltar</Link></footer>
         </div>
     );
 }
