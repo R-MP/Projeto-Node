@@ -1,70 +1,71 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './style.css';
+import { Link} from 'react-router-dom';
 
 function Store() {
     const [status, setStatus] = useState('');
     const modelo = useRef("");
-    const socket = useRef("");
+    const socket = useRef(""); 
     const arquitetura = useRef("");
     const nucleos = useRef("");
     const threads = useRef("");
     const frequencia = useRef("");
     const marca = useRef("");
 
-    return (
-        <div>
-            <form onSubmit={gravar} className='formulario'>
-                Modelo: <input ref={modelo} type="text" required />
-                Socket: <input ref={socket} type="text" required />
-                Arquitetura: <input ref={arquitetura} type="text" required />
-                Núcleos: <input ref={nucleos} type="number" required />
-                Threads: <input ref={threads} type="number" required />
-                Frequência: <input ref={frequencia} type="number" required />
-                Marca: <input ref={marca} type="text" required />
-                <button type='submit'>Enviar</button>
-            </form>
-            <h3>{status.processador}</h3>
-            <h4>Dados retornados pela API:
-                <br />
-                Modelo: {status.dados == null ? "nulo" : status.dados.modelo}
-                <br />
-                Socket: {status.dados == null ? "nulo" : status.dados.socket}
-                <br />
-                Arquitetura: {status.dados == null ? "nulo" : status.dados.arquitetura}
-                <br />
-                Núcleos: {status.dados == null ? "nulo" : status.dados.nucleos}
-                <br />
-                Threads: {status.dados == null ? "nulo" : status.dados.threads}
-                <br />
-                Frequência: {status.dados == null ? "nulo" : status.dados.frequencia}
-                <br />
-                Marca: {status.dados == null ? "nulo" : status.dados.marca}
-            </h4>
-            <Link to='/processador'>Voltar</Link>
-        </div>
-    )
-
     async function gravar(e) {
         e.preventDefault();
         try {
-            const json = {
+            const dados = {
                 modelo: modelo.current.value,
                 socket: socket.current.value,
                 arquitetura: arquitetura.current.value,
-                nucleos: Number(nucleos.current.value),
-                threads: Number(threads.current.value),
-                frequencia: Number(frequencia.current.value),
+                nucleos: nucleos.current.value,
+                threads: threads.current.value,
+                frequencia: frequencia.current.value,
                 marca: marca.current.value
             };
-            const resposta = await axios.post('http://localhost:4000/processador', json);
+            console.log('Dados a serem enviados:', dados);
+            const resposta = await axios.post('http://localhost:4000/processador', dados);
+            console.log('Resposta da API:', resposta.data);
             setStatus(resposta.data);
-            console.log(resposta);
+
+            // Redirecionamento após o envio bem-sucedido
+            window.location.href = '/processador';
         } catch (erro) {
+            console.error('Erro ao enviar dados:', erro);
             setStatus(`Falha: ${erro}`);
         }
     }
+
+    return (
+        
+        <div style={{ padding: '40px' }}>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <div id="feedback-form">
+                <h2 class="header">Registro de Processador</h2>
+                <div>
+                    <form onSubmit={gravar} class="tabela">
+                    <input type="text" placeholder="Modelo" ref={modelo} required></input>
+                    <input type="text" placeholder="Socket" ref={socket} required></input>
+                    <input type="text" placeholder="Arquitetura" ref={arquitetura} required></input>
+                    <input type="text" placeholder="Núcleos" ref={nucleos} required></input>
+                    <input type="text" placeholder="Threads" ref={threads} required></input>
+                    <input type="text" placeholder="Frequencia" ref={frequencia} required></input>
+                    <input type="text" placeholder="Marca" ref={marca} required></input>
+                    <button type="submit">Registrar</button>
+                    </form>
+                </div>
+            </div>
+
+            <h3>{status.processador}</h3>
+            <footer><Link to="/processador" class="btn-voltar">Voltar</Link></footer>
+        </div>
+    );
 }
 
 export default Store;
