@@ -33,11 +33,11 @@ Routes.delete('/memoria/:id', memoriaController.delete);
 
 // Placas Mãe
 const placaMaeController = new PlacaMaeController();
-Routes.get('/placa-mae', placaMaeController.index);
-Routes.get('/placa-mae/:id', placaMaeController.show);
-Routes.post('/placa-mae', placaMaeController.store);
-Routes.put('/placa-mae/:id', placaMaeController.update);
-Routes.delete('/placa-mae/:id', placaMaeController.delete);
+Routes.get('/placaMae', placaMaeController.index);
+Routes.get('/placaMae/:id', placaMaeController.show);
+Routes.post('/placaMae', placaMaeController.store);
+Routes.put('/placaMae/:id', placaMaeController.update);
+Routes.delete('/placaMae/:id', placaMaeController.delete);
 
 // Processadores
 const processadorController = new ProcessadorController();

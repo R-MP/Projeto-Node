@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
 function Memoria() {
@@ -30,35 +31,56 @@ function Memoria() {
     };
 
     return (
-        <div class="corpo">
-    <Link to="/memoriaCreate" class="btn-criar-nova">Criar Nova</Link>
-    <p class="retorno-api">Retorno da API: {JSON.stringify(memorias)}</p>
-    <table class="tabela">
-        <thead>
-            <tr>
-                <th>Memorias</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {memorias.map((memoria) => (
-                <tr key={memoria.id}>
-                    <td>{memoria.modelo}</td>
-                    <td>
-                        <Link to={`/memoriaUpdate/${memoria.id}`} class="btn-alterar">Alterar</Link>
-                    </td>
-                    <td>
-                        <button onClick={() => handleDelete(memoria.id)} class="btn-remover">Remover</button>
-                    </td>
+        
+        <div style={{ padding: '60px' }}>
+        
+            <br></br>
+            <br></br>
+            <br></br>
+        <div class="crtNew">
+            <Link to="/memoriaCreate" class="btn-criar-nova">
+                Criar Nova
+            </Link>
+        </div>
+        <p class="retorno-api">Retorno da API: {JSON.stringify(memorias)}</p>
+        <table class="tabela">
+            <tbody>          
+                <tr>
+                    <td class="top center">ID</td>
+                    <td class="top center"><strong>Modelo</strong></td>
+                    <td class="top center"><strong>DDR</strong></td>
+                    <td class="top center"><strong>Frequencia</strong></td>
+                    <td class="top center"><strong>RAM</strong></td>
+                    <td class="top center"><strong>Marca</strong></td>
+                    <td class="top center" colspan="2" width="1"><strong>Ações</strong></td>
                 </tr>
-            ))}
-        </tbody>
-    </table>
-    <Link to="/" class="btn-voltar">Voltar</Link>
-</div>
+            
+            </tbody>
+            <tbody>
+                {memorias.map((memoria) => (
+                    
+                    <tr key={memoria.id}> 
+                        <td align="center">{memoria.id}</td>
+                        <td align="center">{memoria.modelo}</td>
+                        <td align="center">{memoria.ddr}</td>
+                        <td align="center">{memoria.frequencia}</td>
+                        <td align="center">{memoria.quantidadeRam}</td>
+                        <td align="center">{memoria.marca}</td>
+                        <td align="center"><Link to={`/memoriaUpdate/${memoria.id}`} class="btn btn-success">Alterar</Link>&nbsp;&nbsp;
+                        <Link to={`/memoriaShow/${memoria.id}`} class="btn btn-primary">Ver</Link>&nbsp;&nbsp;
+                        <button onClick={() => handleDelete(memoria.id)} class="btn btn-danger">Remover</button></td>
+                    
+                    </tr>
 
-    );
-}
+
+                ))}
+            </tbody>
+        </table>
+        <footer><Link to="/" class="btn-voltar">Voltar</Link></footer>
+        
+    </div>
+
+        );
+    }
 
 export default Memoria;

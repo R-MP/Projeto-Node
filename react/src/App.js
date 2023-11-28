@@ -47,11 +47,11 @@ function App() {
         <Route path="/processadorUpdate/:id" element={<ProcessadorUpdate />} />
         <Route path="/processadorDelete/:id" element={<ProcessadorDelete />} />
         {/* Placa Mãe */}
-        <Route path="/placa-mae" element={<PlacaMae />} />
-        <Route path="/placa-mae/:id" element={<PlacaMaeShow />} />
-        <Route path="/placa-maeCreate" element={<PlacaMaeStore />} />
-        <Route path="/placa-maeUpdate/:id" element={<PlacaMaeUpdate />} />
-        <Route path="/placa-maeDelete/:id" element={<PlacaMaeDelete />} />
+        <Route path="/placaMae" element={<PlacaMae />} />
+        <Route path="/placaMae/:id" element={<PlacaMaeShow />} />
+        <Route path="/placaMaeCreate" element={<PlacaMaeStore />} />
+        <Route path="/placaMaeUpdate/:id" element={<PlacaMaeUpdate />} />
+        <Route path="/placaMaeDelete/:id" element={<PlacaMaeDelete />} />
       </Routes>
     </BrowserRouter>
   );

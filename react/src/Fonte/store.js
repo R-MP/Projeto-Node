@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Store() {
     const [status, setStatus] = useState('');
     const modelo = useRef("");
-    const potencia = useRef(0); // Definido como número padrão
+    const potencia = useRef("");
     const formato = useRef("");
     const marca = useRef("");
 

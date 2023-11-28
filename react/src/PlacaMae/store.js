@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './style.css';
+import { Link} from 'react-router-dom';
 
 function Store() {
     const [status, setStatus] = useState('');
     const modelo = useRef("");
-    const socket = useRef("");
+    const socket = useRef(""); 
     const formato = useRef("");
     const slotRam = useRef("");
     const slotExp = useRef("");
@@ -24,9 +23,12 @@ function Store() {
                 marca: marca.current.value
             };
             console.log('Dados a serem enviados:', dados);
-            const resposta = await axios.post('http://localhost:4000/placa-mae', dados);
+            const resposta = await axios.post('http://localhost:4000/placaMae', dados);
             console.log('Resposta da API:', resposta.data);
             setStatus(resposta.data);
+
+            // Redirecionamento após o envio bem-sucedido
+            window.location.href = '/placaMae';
         } catch (erro) {
             console.error('Erro ao enviar dados:', erro);
             setStatus(`Falha: ${erro}`);
@@ -34,32 +36,31 @@ function Store() {
     }
 
     return (
-        <div>
-            <form onSubmit={gravar} className='formulario'>
-                Modelo: <input ref={modelo} type="text" required />
-                Socket: <input ref={socket} type="text" required />
-                Formato: <input ref={formato} type="text" required />
-                Slot RAM: <input ref={slotRam} type="text" required />
-                Slot Expansão: <input ref={slotExp} type="text" required />
-                Marca: <input ref={marca} type="text" required />
-                <button type='submit'>Enviar</button>
-            </form>
+        
+        <div style={{ padding: '40px' }}>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <div id="feedback-form">
+                <h2 class="header">Registro de Placa Mãe</h2>
+                <div>
+                    <form onSubmit={gravar} class="tabela">
+                    <input type="text" placeholder="Modelo" ref={modelo} required></input>
+                    <input type="text" placeholder="Socket" ref={socket} required></input>
+                    <input type="text" placeholder="Formato" ref={formato} required></input>
+                    <input type="text" placeholder="Slot RAM" ref={slotRam} required></input>
+                    <input type="text" placeholder="Slot Expansão" ref={slotExp} required></input>
+                    <input type="text" placeholder="Marca" ref={marca} required></input>
+                    <button type="submit">Registrar</button>
+                    </form>
+                </div>
+            </div>
+
             <h3>{status.placaMae}</h3>
-            <h4>Dados retornados pela API:
-                <br />
-                Modelo: {status.dados?.modelo || "nulo"}
-                <br />
-                Socket: {status.dados?.socket || "nulo"}
-                <br />
-                Formato: {status.dados?.formato || "nulo"}
-                <br />
-                Slot RAM: {status.dados?.slotRam || "nulo"}
-                <br />
-                Slot Expansão: {status.dados?.slotExp || "nulo"}
-                <br />
-                Marca: {status.dados?.marca || "nulo"}
-            </h4>
-            <Link to='/placa-mae'>Voltar</Link>
+            <footer><Link to="/placaMae" class="btn-voltar">Voltar</Link></footer>
         </div>
     );
 }

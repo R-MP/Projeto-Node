@@ -37,7 +37,7 @@ function Menu() {
                 <ul>
                     <li className="active"><a href="/">Home</a></li>
                     <li><a href="/processador">Processadores</a></li>
-                    <li><a href="/placa-mae">Placas Mãe</a></li>
+                    <li><a href="/placaMae">Placas Mãe</a></li>
                     <li><a href="/memoria">Memórias</a></li>
                     <li><a href="/fonte">Fontes</a></li>
                 </ul>

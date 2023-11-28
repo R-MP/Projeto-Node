@@ -1,71 +1,68 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Update() {
     const [status, setStatus] = useState({});
     const { id } = useParams();
-    const [dados, setDados] = useState({ id: 0, modelo: "", socket: "", formato: "", slotram: "", slotexp: "", marca: "" });
+    const [dados, setDados] = useState({ id: 0, modelo: "", socket: "", formato: "", slotRam: "", slotExp: "", marca: "" });
 
     useEffect(() => {
         async function consultar() {
             try {
-                const resposta = await axios.get(`http://localhost:4000/placa-mae/${id}`);
+                const resposta = await axios.get(`http://localhost:4000/placaMae/${id}`);
                 setDados(resposta.data);
+
+                
             } catch (error) {
                 console.error(`Erro ao buscar dados: ${error}`);
             }
+
+            
         }
         consultar();
     }, [id]);
 
     return (
-        <div className="corpo">
-            <form onSubmit={gravar} className='formulario'>
-                <label htmlFor="modelo">Modelo:</label>
-                <input id="modelo" className="input-field" value={dados?.modelo || ''} type="text" required onChange={(e) => setDados({ ...dados, modelo: e.target.value })} />
+        <div div style={{ padding: '40px' }}>
 
-                <label htmlFor="socket">Socket:</label>
-                <input id="socket" className="input-field" value={dados?.socket || ''} type="text" required onChange={(e) => setDados({ ...dados, socket: e.target.value })} />
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
 
-                <label htmlFor="formato">Formato:</label>
-                <input id="formato" className="input-field" value={dados?.formato || ''} type="text" required onChange={(e) => setDados({ ...dados, formato: e.target.value })} />
-
-                <label htmlFor="slotram">Slot RAM:</label>
-                <input id="slotram" className="input-field" value={dados?.slotram || ''} type="text" required onChange={(e) => setDados({ ...dados, slotram: e.target.value })} />
-
-                <label htmlFor="slotexp">Slot Expansão:</label>
-                <input id="slotexp" className="input-field" value={dados?.slotexp || ''} type="text" required onChange={(e) => setDados({ ...dados, slotexp: e.target.value })} />
-
-                <label htmlFor="marca">Marca:</label>
-                <input id="marca" className="input-field" value={dados?.marca || ''} type="text" required onChange={(e) => setDados({ ...dados, marca: e.target.value })} />
-
-                <button type='submit' className="submit-btn">Enviar</button>
-            </form>
-
-            {dados && (
+            <div id="feedback-form">
+                <h2 class="header">Alterar Registro</h2>
                 <div>
-                    <p>Modelo: {dados.modelo}</p>
-                    <p>Socket: {dados.socket}</p>
-                    <p>Formato: {dados.formato}</p>
-                    <p>Slot RAM: {dados.slotram}</p>
-                    <p>Slot Expansão: {dados.slotexp}</p>
-                    <p>Marca: {dados.marca}</p>
+                    <form onSubmit={gravar}>
+                        <input id="modelo" class="input-field" value={dados?.modelo || ''} type="text" required onChange={(e) => setDados({ ...dados, modelo: e.target.value })} />
+                        <input id="socket" class="input-field" value={dados?.socket || ''} type="text" required onChange={(e) => setDados({ ...dados, socket: e.target.value })} />
+                        <input id="formato" class="input-field" value={dados?.formato || ''} type="text" required onChange={(e) => setDados({ ...dados, formato: e.target.value })} />
+                        <input id="slotRam" class="input-field" value={dados?.slotRam || ''} type="text" required onChange={(e) => setDados({ ...dados, slotRam: e.target.value })} />
+                        <input id="marca" class="input-field" value={dados?.slotExp || ''} type="text" required onChange={(e) => setDados({ ...dados, slotExp: e.target.value })} />
+                        <input id="marca" class="input-field" value={dados?.marca || ''} type="text" required onChange={(e) => setDados({ ...dados, marca: e.target.value })} />
+                        <button type='submit' class="submit-btn">Enviar</button>
+                    </form>
                 </div>
-            )}
+            </div>
 
-            <p>{status.placaMae}</p>
+    <p>{status.placaMae}</p>
 
-            <a href='/placa-mae' className='voltar'>Voltar</a>
-        </div>
-    );
+    <footer><Link to="/placaMae" class="btn-voltar">Voltar</Link></footer>
+</div>
+
+    )
 
     async function gravar(e) {
         e.preventDefault();
         try {
-            const resposta = await axios.put(`http://localhost:4000/placa-mae/${id}`, dados);
+            const resposta = await axios.put(`http://localhost:4000/placaMae/${id}`, dados);
             setStatus(resposta.data);
             console.log(resposta);
+
+            // Redirecionamento após o envio bem-sucedido
+            window.location.href = '/placaMae';
         } catch (erro) {
             setStatus(`Falha: ${erro}`);
         }

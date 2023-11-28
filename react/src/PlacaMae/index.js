@@ -1,63 +1,88 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
 function PlacaMae() {
-    const [placasMae, setPlacasMae] = useState([]);
+    const [placaMaes, setPlacaMaes] = useState([]);
 
     useEffect(() => {
-        async function fetchPlacasMae() {
+        async function fetchPlacaMaes() {
             try {
-                const response = await axios.get('http://localhost:4000/placa-mae');
-                setPlacasMae(response.data);
+                const response = await axios.get('http://localhost:4000/placaMae');
+                setPlacaMaes(response.data);
             } catch (error) {
                 console.error(`Erro ao buscar dados: ${error}`);
             }
         }
 
-        fetchPlacasMae();
+        fetchPlacaMaes();
     }, []);
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/placa-mae/${id}`);
-            const updatedPlacasMae = placasMae.filter((placaMae) => placaMae.id !== id);
-            setPlacasMae(updatedPlacasMae);
+            await axios.delete(`http://localhost:4000/placaMae/${id}`);
+            const updatedPlacaMaes = placaMaes.filter((placaMae) => placaMae.id !== id);
+            setPlacaMaes(updatedPlacaMaes);
         } catch (error) {
             console.error(`Erro ao excluir: ${error}`);
         }
     };
 
     return (
-        <div class="corpo">
-            <Link to="/placa-maeCreate" class="btn-criar-nova">Criar Nova</Link>
-            <p class="retorno-api">Retorno da API: {JSON.stringify(placasMae)}</p>
-            <table class="tabela">
-                <thead>
-                    <tr>
-                        <th>Placas Mãe</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {placasMae.map((placaMae) => (
-                        <tr key={placaMae.id}>
-                            <td>{placaMae.modelo}</td>
-                            <td>
-                                <Link to={`/placa-maeUpdate/${placaMae.id}`} class="btn-alterar">Alterar</Link>
-                            </td>
-                            <td>
-                                <button onClick={() => handleDelete(placaMae.id)} class="btn-remover">Remover</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Link to="/" class="btn-voltar">Voltar</Link>
+        
+        <div style={{ padding: '60px' }}>
+        
+            <br></br>
+            <br></br>
+            <br></br>
+        <div class="crtNew">
+            <Link to="/placaMaeCreate" class="btn-criar-nova">
+                Criar Nova
+            </Link>
         </div>
-    );
-}
+        <p class="retorno-api">Retorno da API: {JSON.stringify(placaMaes)}</p>
+        <table class="tabela">
+            <tbody>          
+                <tr>
+                    <td class="top center">ID</td>
+                    <td class="top center"><strong>Modelo</strong></td>
+                    <td class="top center"><strong>Socket</strong></td>
+                    <td class="top center"><strong>Formato</strong></td>
+                    <td class="top center"><strong>RAM</strong></td>
+                    <td class="top center"><strong>Expansão</strong></td>
+                    <td class="top center"><strong>Marca</strong></td>
+                    <td class="top center" colspan="2" width="1"><strong>Ações</strong></td>
+                </tr>
+            
+            </tbody>
+            <tbody>
+                {placaMaes.map((placaMae) => (
+                    
+                    <tr key={placaMae.id}> 
+                        <td align="center">{placaMae.id}</td>
+                        <td align="center">{placaMae.modelo}</td>
+                        <td align="center">{placaMae.socket}</td>
+                        <td align="center">{placaMae.formato}</td>
+                        <td align="center">{placaMae.slotRam}</td>
+                        <td align="center">{placaMae.slotExp}</td>
+                        <td align="center">{placaMae.marca}</td>
+                        <td align="center"><Link to={`/placaMaeUpdate/${placaMae.id}`} class="btn btn-success">Alterar</Link>&nbsp;&nbsp;
+                        <Link to={`/placaMaeShow/${placaMae.id}`} class="btn btn-primary">Ver</Link>&nbsp;&nbsp;
+                        <button onClick={() => handleDelete(placaMae.id)} class="btn btn-danger">Remover</button></td>
+                    
+                    </tr>
+
+
+                ))}
+            </tbody>
+        </table>
+        <footer><Link to="/" class="btn-voltar">Voltar</Link></footer>
+        
+    </div>
+
+        );
+    }
 
 export default PlacaMae;

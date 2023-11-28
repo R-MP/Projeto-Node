@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
 function Fonte() {
@@ -31,7 +32,8 @@ function Fonte() {
 
     return (
         
-        <div style={{ padding: '40px' }}>
+        <div style={{ padding: '60px' }}>
+        
             <br></br>
             <br></br>
             <br></br>
@@ -62,8 +64,9 @@ function Fonte() {
                         <td align="center">{fonte.potencia}</td>
                         <td align="center">{fonte.formato}</td>
                         <td align="center">{fonte.marca}</td>
-                        <td align="center"><Link to={`/fonteUpdate/${fonte.id}`} class="btn-alterar">Alterar</Link>
-                        <button onClick={() => handleDelete(fonte.id)} class="btn-remover">Remover</button></td>
+                        <td align="center"><Link to={`/fonteUpdate/${fonte.id}`} class="btn btn-success">Alterar</Link>&nbsp;&nbsp;
+                        <Link to={`/fonteShow/${fonte.id}`} class="btn btn-primary">Ver</Link>&nbsp;&nbsp;
+                        <button onClick={() => handleDelete(fonte.id)} class="btn btn-danger">Remover</button></td>
                     
                     </tr>
 
